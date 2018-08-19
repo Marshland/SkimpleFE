@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-header>
+    <img mat-card-avatar [src]="category.imgPath">
+    <mat-card-title>
+      {{category.title}}
+      <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Opzioni categoria">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item>Rimuovi dalla tua Home</button>
+        <button mat-menu-item>Aggiungi alla tua Home</button>
+        <button mat-menu-item>Ricevi notifiche per questa categoria</button>
+      </mat-menu>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="category-card-content">
+    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+      <app-product *ngFor="let product of category.products"></app-product>
+    </div>
+  </mat-card-content>
+</mat-card>

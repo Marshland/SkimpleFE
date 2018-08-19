@@ -1,0 +1,18 @@
+mat-card-header {
+  display: flex;
+  align-items: center;
+}
+
+.mat-card-title {
+  margin-bottom: 0;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.category-card-content {
+  text-align: center;
+}

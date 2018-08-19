@@ -1,0 +1,17 @@
+<mat-card class="product-card">
+  <mat-card-header fxLayoutAlign="center center">
+    <mat-card-title>{{product.title}}
+      <app-share-button class="product-card-share-menu"></app-share-button>
+    </mat-card-title>
+    <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="product.imgPath" [alt]="product.imgTitle">
+  <mat-card-content>
+    <p>
+      {{product.description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-stroked-button color="primary">Vedi su Amazon</button>
+  </mat-card-actions>
+</mat-card>

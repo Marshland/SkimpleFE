@@ -1,0 +1,17 @@
+<button mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon>share</mat-icon>
+</button>
+<mat-menu #menu="matMenu" [class]="'share-menu'">
+  <button mat-menu-item class="facebook-icon">
+    <fa-icon [icon]="['fab','facebook-f']" size="lg"></fa-icon>
+  </button>
+  <button mat-menu-item class="twitter-icon">
+    <fa-icon [icon]="['fab','twitter']" size="lg"></fa-icon>
+  </button>
+  <button mat-menu-item class="instagram-icon">
+    <fa-icon [icon]="['fab','instagram']" size="lg"></fa-icon>
+  </button>
+  <button mat-menu-item class="telegram-icon">
+    <fa-icon [icon]="['fab','telegram-plane']" size="lg"></fa-icon>
+  </button>
+</mat-menu>

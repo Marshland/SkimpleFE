@@ -1,0 +1,18 @@
+<section class="main-section">
+  <app-main-carousel></app-main-carousel>
+
+  <app-main-search></app-main-search>
+
+  <h1>Prodotto del giorno</h1>
+  <app-best-product></app-best-product>
+
+  <div class="categories-container">
+    <app-bomb-products></app-bomb-products>
+
+    <app-categories-carousel></app-categories-carousel>
+
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+      <app-category-products *ngFor="let category of categories" [category]="category"></app-category-products>
+    </div>
+  </div>
+</section>

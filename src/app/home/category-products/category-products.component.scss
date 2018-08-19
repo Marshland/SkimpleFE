@@ -1,0 +1,28 @@
+:host {
+  max-width: 48%;
+}
+
+mat-card-header {
+  display: flex;
+  align-items: center;
+}
+
+.mat-card-title {
+  margin-bottom: 0;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.category-card-content {
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  :host {
+    max-width: 100%;
+  }
+}

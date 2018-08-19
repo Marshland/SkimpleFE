@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'variables';
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: $skimple-blue;
+}
+
+.mat-drawer-content,
+.mat-drawer,
+.mat-list-item,
+.mat-card,
+.mat-toolbar {
+  color: $skimple-blue !important;
+}
+
+.facebook-icon {
+  color: #3b5998 !important;
+}
+.twitter-icon {
+  color: #1da1f2 !important;
+}
+.instagram-icon {
+  color: #e1306c !important;
+}
+.telegram-icon {
+  color: #0088cc !important;
+}

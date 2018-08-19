@@ -1,0 +1,58 @@
+@import 'variables';
+
+.categories-carousel {
+  margin: 20px 0;
+}
+
+.mat-card-title {
+  text-align: center;
+}
+
+.categoryStyle {
+  max-width: 100%;
+  text-align: center;
+
+  h1 {
+    text-align: center;
+    font-size: 1em;
+    height: 5em;
+  }
+}
+
+img {
+  height: 7em;
+}
+
+:host ::ng-deep {
+  .tile {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .ngucarouselPoint li {
+    background: $skimple-blue !important;
+  }
+}
+
+.leftRs {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  height: 50px;
+  left: 0;
+}
+
+.rightRs {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  height: 50px;
+  right: 0;
+}

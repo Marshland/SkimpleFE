@@ -1,0 +1,13 @@
+.accordion {
+  transition: transform 0.3s;
+}
+.opened {
+  transform: rotate(90deg);
+}
+
+@for $deepLevel from 1 to 10 {
+  [deepLevel='#{$deepLevel}'] {
+    $val: (10 * $deepLevel);
+    padding-left: #{$val}px;
+  }
+}

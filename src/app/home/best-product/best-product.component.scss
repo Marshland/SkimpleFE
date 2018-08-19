@@ -1,0 +1,17 @@
+:host {
+  margin: 20px 0;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+}
+
+.product-card {
+  padding: 2.5em;
+}
+
+.product-card-share-menu {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}

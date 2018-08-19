@@ -1,0 +1,16 @@
+<mat-card class="categories-carousel">
+  <h1 mat-card-title>Categorie in evidenza</h1>
+  <ngu-carousel mat-card-content [inputs]="carouselTile" (initData)="initDataFn($event)">
+    <ngu-tile NguCarouselItem *ngFor="let category of categories" class="categoryStyle">
+      <img [src]="category.imgPath">
+      <h1>{{category.title}}</h1>
+    </ngu-tile>
+
+    <button NguCarouselPrev mat-icon-button class="leftRs" color="accent">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <button NguCarouselNext mat-icon-button class="rightRs" color="accent">
+      <mat-icon>arrow_forward_ios</mat-icon>
+    </button>
+  </ngu-carousel>
+</mat-card>

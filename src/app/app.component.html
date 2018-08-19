@@ -1,21 +1,49 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container mat-typography" [class.is-mobile]="mobileQuery.matches">
+  <mat-toolbar class="toolbar">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <a mat-button routerLink="/">
+        <img src="./assets/images/skimple.svg">
+      </a>
 
-<router-outlet></router-outlet>
+      <a *ngIf="!(isAuth$ | async)" fxShow fxHide.xs="true" mat-button routerLink="/signup">Registrati</a>
+      <a *ngIf="!(isAuth$ | async)" fxShow fxHide.xs="true" mat-button routerLink="/login">Login</a>
+      <a *ngIf="isAuth$ | async" fxShow fxHide.xs="true" mat-button (click)="onLogout()">Logout</a>
+
+      <div fxFlex fxLayoutAlign="end center">
+        <a mat-icon-button aria-label="Facebook" class="facebook-icon">
+          <fa-icon [icon]="['fab','facebook-f']" size="lg"></fa-icon>
+        </a>
+        <a mat-icon-button aria-label="Twittwe" class="twitter-icon">
+          <fa-icon [icon]="['fab','twitter']" size="lg"></fa-icon>
+        </a>
+        <a mat-icon-button aria-label="Instagram" class="instagram-icon">
+          <fa-icon [icon]="['fab','instagram']" size="lg"></fa-icon>
+        </a>
+        <a mat-icon-button aria-label="Telegram" class="telegram-icon">
+          <fa-icon [icon]="['fab','telegram-plane']" size="lg"></fa-icon>
+        </a>
+      </div>
+    </mat-toolbar-row>
+    <mat-toolbar-row fxHide fxShow.xs="true" [ngClass]="{'shrink-toolbar': shrinkToolbar || snav.opened}">
+      <a *ngIf="!(isAuth$ | async)" mat-button routerLink="/signup">Registrati</a>
+      <a *ngIf="!(isAuth$ | async)" mat-button routerLink="/login">Login</a>
+      <a *ngIf="isAuth$ | async" mat-button style="cursor: pointer" (click)="onLogout()">Logout</a>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <h2 class="category-title">Categorie</h2>
+      <mat-nav-list>
+        <app-category-item [categories]="categories"></app-category-item>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+      <app-footer></app-footer>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+</div>

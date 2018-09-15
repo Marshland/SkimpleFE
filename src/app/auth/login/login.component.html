@@ -1,16 +1,16 @@
 <section>
-  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <form #f="ngForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" (ngSubmit)="f.onSubmit()">
     <mat-form-field>
-      <input type="email" matInput placeholder="Email" formControlName="email">
-      <mat-hint>Inserisci un'email valida.</mat-hint>
-      <mat-error>Email errata</mat-error>
+      <input type="email" matInput placeholder="Email" name="email" ngModel #emailInput="ngModel">
+      <mat-error *ngIf="emailInput.hasError('required')">Il campo è obbligatorio.</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">Email non valida.</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input type="password" matInput placeholder="Password" formControlName="password">
+      <input type="password" matInput placeholder="Password" name="password" ngModel #pwInput="ngModel" required>
       <mat-hint>Inserisci la tua password</mat-hint>
       <mat-error>Password errata</mat-error>
     </mat-form-field>
-    <button *ngIf="!(isLoading$ | async)" type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Login</button>
+    <button *ngIf="!(isLoading$ | async)" type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Login</button>
     <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
   </form>
 </section>

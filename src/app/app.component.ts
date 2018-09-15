@@ -3,9 +3,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { MediaMatcher } from '@angular/cdk/layout';
 
-import { AuthService } from './auth/auth.service';
-import * as fromRoot from './app.reducer';
-import { Category } from './home/category.model';
+import * as fromRoot from './store/app.reducer';
+import * as AuthActions from './auth/store/auth.actions';
+import { Category } from './core/home/category.model';
 
 @Component({
   selector: 'app-root',
@@ -14,31 +14,31 @@ import { Category } from './home/category.model';
 })
 export class AppComponent implements OnInit, OnDestroy {
   isAuth$: Observable<boolean>;
-  categories: Category[] = [
-    { title: 'Alimentari', link: '', children: [] },
-    { title: 'Salute e cura della Persona', link: '', children: [] },
-    { title: 'pulizia e cura della casa', link: '', children: [] },
-    { title: 'Casa & Cucina', link: '', children: [] },
-    { title: 'Abbigliamento', link: '', children: [] },
-    { title: 'DVD e Blu - ray', link: '', children: [] },
-    { title: 'Sport e tempo libero', link: '', children: [] },
-    { title: 'Elettronica', link: '', children: [] },
-    { title: 'Informatica', link: '', children: [] },
-    { title: 'Cancelleria e prodotti per ufficio', link: '', children: [] },
-    { title: 'Prodotti per animali domestici', link: '', children: [] },
-    { title: 'Giochi e giocattoli', link: '', children: [] },
-    { title: 'Bellezza', link: '', children: [] },
-    { title: 'Scarpe e borse', link: '', children: [] },
-    { title: 'Gioielli', link: '', children: [] },
-    { title: 'Videogiochi', link: '', children: [] },
-    { title: 'Buoni regalo', link: '', children: [] },
-    { title: 'Fai da te', link: '', children: [] },
-    { title: 'Valigeria', link: '', children: [] },
-    { title: 'Illuminazione', link: '', children: [] },
-    { title: 'Libri', link: '', children: [] },
-    { title: 'Auto e moto', link: '', children: [] },
-    { title: 'Strumenti musicali', link: '', children: [] },
-    { title: 'Prima infanzia', link: '', children: [] }
+  categories: Partial<Category>[] = [
+    { title: 'Alimentari', children: [] },
+    { title: 'Salute e cura della Persona', children: [] },
+    { title: 'pulizia e cura della casa', children: [] },
+    { title: 'Casa & Cucina', children: [] },
+    { title: 'Abbigliamento', children: [] },
+    { title: 'DVD e Blu - ray', children: [] },
+    { title: 'Sport e tempo libero', children: [] },
+    { title: 'Elettronica', children: [] },
+    { title: 'Informatica', children: [] },
+    { title: 'Cancelleria e prodotti per ufficio', children: [] },
+    { title: 'Prodotti per animali domestici', children: [] },
+    { title: 'Giochi e giocattoli', children: [] },
+    { title: 'Bellezza', children: [] },
+    { title: 'Scarpe e borse', children: [] },
+    { title: 'Gioielli', children: [] },
+    { title: 'Videogiochi', children: [] },
+    { title: 'Buoni regalo', children: [] },
+    { title: 'Fai da te', children: [] },
+    { title: 'Valigeria', children: [] },
+    { title: 'Illuminazione', children: [] },
+    { title: 'Libri', children: [] },
+    { title: 'Auto e moto', children: [] },
+    { title: 'Strumenti musicali', children: [] },
+    { title: 'Prima infanzia', children: [] }
   ];
 
   mobileQuery: MediaQueryList;
@@ -46,12 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   shrinkToolbar = false;
 
-  constructor(
-    changeDetectorRef: ChangeDetectorRef,
-    media: MediaMatcher,
-    private authService: AuthService,
-    private store: Store<fromRoot.State>
-  ) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private store: Store<fromRoot.AppState>) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -66,7 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    this.authService.logout();
+    this.store.dispatch(new AuthActions.Logout());
   }
 
   ngOnDestroy(): void {

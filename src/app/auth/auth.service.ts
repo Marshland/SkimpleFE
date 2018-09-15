@@ -1,59 +1,67 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
-import { Store } from '@ngrx/store';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+
+import * as _moment from 'moment';
+const moment = _moment;
 
 import { User } from './user.model';
 import { AuthData } from './auth-data.model';
-import { UIService } from '../shared/ui.service';
-import * as fromRoot from '../app.reducer';
-import * as UI from '../shared/ui.actions';
-import * as Auth from './auth.actions';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
-  constructor(private router: Router, private uiService: UIService, private store: Store<fromRoot.State>) {}
+  constructor(private httpClient: HttpClient) {}
 
-  initAuthListener() {
-    // this.afAuth.authState.subscribe(user => {
-    //   if (user) {
-    //     this.store.dispatch(new Auth.SetAuthenticated());
-    //     this.router.navigate(['/training']);
-    //   } else {
-    //     this.trainingService.cancelSubscriptions();
-    //     this.store.dispatch(new Auth.SetUnauthenticated());
-    //     this.router.navigate(['/login']);
-    //   }
-    // });
+  checkLocalStorage(): Observable<User> {
+    const token = localStorage.getItem('token');
+    const expireIn = localStorage.getItem('expireIn');
+    if (!token || !expireIn) {
+      return null;
+    }
+
+    const expireToken = moment().date(+expireIn);
+    if (expireToken.isAfter(moment())) {
+      return this.getUserFromToken(token);
+    }
   }
 
-  registerUser(authData: AuthData) {
-    // this.store.dispatch(new UI.StartLoading());
-    // this.afAuth.auth
-    //   .createUserWithEmailAndPassword(authData.email, authData.password)
-    //   .then(result => {
-    //     this.store.dispatch(new UI.StopLoading());
-    //   })
-    //   .catch(error => {
-    //     this.store.dispatch(new UI.StopLoading());
-    //     this.uiService.showSnackbar(error.message, null, 3000);
-    //   });
+  registerUser(data: AuthData): Observable<User> {
+    // this.httpClient.post(`${environment.apiPath}/register`, data);
+    return of({
+      id: 'feu9rhf8reh',
+      email: 'skimple@skimple.it',
+      token: 'aaaaaaaaaaaaaaaaaaa',
+      expireIn: moment()
+        .add(2, 'hours')
+        .get('seconds'),
+      isAdmin: true
+    });
   }
 
-  login(authData: AuthData) {
-    // this.store.dispatch(new UI.StartLoading());
-    // this.afAuth.auth
-    //   .signInWithEmailAndPassword(authData.email, authData.password)
-    //   .then(result => {
-    //     this.store.dispatch(new UI.StopLoading());
-    //   })
-    //   .catch(error => {
-    //     this.store.dispatch(new UI.StopLoading());
-    //     this.uiService.showSnackbar(error.message, null, 3000);
-    //   });
+  login(data: AuthData) {
+    // this.httpClient.post(`${environment.apiPath}/login`, data);
+    return of({
+      id: 'feu9rhf8reh',
+      email: 'skimple@skimple.it',
+      token: 'aaaaaaaaaaaaaaaaaaa',
+      expireIn: moment()
+        .add(2, 'hours')
+        .get('seconds'),
+      isAdmin: true
+    });
   }
 
-  logout() {
-    // this.afAuth.auth.signOut();
+  private getUserFromToken(token: string) {
+    // this.httpClient.post(`${environment.apiPath}/login`, data);
+    return of({
+      id: 'feu9rhf8reh',
+      email: 'skimple@skimple.it',
+      token: 'aaaaaaaaaaaaaaaaaaa',
+      expireIn: moment()
+        .add(2, 'hours')
+        .get('seconds'),
+      isAdmin: true
+    });
   }
 }

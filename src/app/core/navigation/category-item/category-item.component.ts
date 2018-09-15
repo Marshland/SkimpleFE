@@ -18,4 +18,8 @@ export class CategoryItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  categoryLink(category: Category) {
+    return encodeURI(category.title);
+  }
 }

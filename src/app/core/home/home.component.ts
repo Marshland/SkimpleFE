@@ -8,7 +8,7 @@ import { Product } from './product.model';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  categories: Category[] = [
+  categories: Partial<Category>[] = [
     {
       title: 'Abbigliamento',
       imgPath: './assets/images/categories/clothing.png',

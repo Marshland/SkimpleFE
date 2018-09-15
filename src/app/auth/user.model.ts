@@ -1,4 +1,7 @@
 export interface User {
+  id: string;
   email: string;
-  userId: string;
+  token: string;
+  expireIn: number;
+  isAdmin: boolean;
 }

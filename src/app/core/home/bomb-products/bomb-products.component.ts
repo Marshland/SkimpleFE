@@ -8,7 +8,7 @@ import { Product } from '../product.model';
   styleUrls: ['./bomb-products.component.scss']
 })
 export class BombProductsComponent implements OnInit {
-  category: Category = {
+  category: Partial<Category> = {
     title: 'Bombe del giorno',
     imgPath: './assets/images/categories/bomb.svg',
     products: [new Product(), new Product(), new Product(), new Product()]

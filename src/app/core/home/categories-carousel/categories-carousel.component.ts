@@ -8,7 +8,7 @@ import { NguCarousel, NguCarouselService, NguCarouselStore } from '@ngu/carousel
   styleUrls: ['./categories-carousel.component.scss']
 })
 export class CategoriesCarouselComponent implements OnInit {
-  categories: Category[];
+  categories: Partial<Category>[];
   carouselTile: NguCarousel;
   private carouselToken: string;
 

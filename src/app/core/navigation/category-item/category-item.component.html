@@ -1,6 +1,6 @@
 <ng-container *ngFor="let category of categories">
   <mat-list-item [attr.deepLevel]="deepLevel">
-    <a matLine routeLink="category.link">{{ category.title }}</a>
+    <a matLine [routerLink]="categoryLink(category)">{{ category.title }}</a>
     <ng-container *ngIf="category.children.length > 0">
       <button mat-icon-button (click)="showChildren = !showChildren">
         <mat-icon class="accordion" [ngClass]="{'opened': showChildren}">arrow_forward_ios</mat-icon>

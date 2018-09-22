@@ -25,14 +25,14 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
     case AuthActions.SIGNIN:
       return {
         ...state,
-        authenticated: true,
+        user: action.payload,
         isLoading: false
       };
     case AuthActions.LOGOUT:
       return {
         ...state,
-        token: null,
-        authenticated: false
+        user: null,
+        token: null
       };
     case AuthActions.SET_TOKEN:
       return {
@@ -50,4 +50,5 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
 }
 
 export const getIsAuth = (state: State) => state.user !== null;
+export const getIsAdmin = (state: State) => state.user !== null && state.user.isAdmin;
 export const getIsLoading = (state: State) => state.isLoading;

@@ -1,0 +1,42 @@
+<mat-toolbar class="toolbar">
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="toggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a mat-button routerLink="/">
+      <img src="./assets/images/skimple.svg">
+    </a>
+
+
+
+    <div fxFlex fxLayoutAlign="end center">
+
+
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <a *ngIf="!(isAuth$ | async)" mat-menu-item routerLink="/login">Login</a>
+        <a *ngIf="!(isAuth$ | async)" mat-menu-item routerLink="/signup">Registrati</a>
+        <a *ngIf="isAdmin$ | async" routerLink="/admin" routerLinkActive="router-link-active" mat-menu-item>Sezione
+          Admin</a>
+        <a *ngIf="isAuth$ | async" mat-menu-item (click)="logout()">Logout</a>
+      </mat-menu>
+
+      <mat-divider [vertical]="true"></mat-divider>
+
+      <a mat-icon-button aria-label="Facebook" class="facebook-icon">
+        <fa-icon [icon]="['fab','facebook-f']" size="lg"></fa-icon>
+      </a>
+      <a mat-icon-button aria-label="Twittwe" class="twitter-icon">
+        <fa-icon [icon]="['fab','twitter']" size="lg"></fa-icon>
+      </a>
+      <a mat-icon-button aria-label="Instagram" class="instagram-icon">
+        <fa-icon [icon]="['fab','instagram']" size="lg"></fa-icon>
+      </a>
+      <a mat-icon-button aria-label="Telegram" class="telegram-icon">
+        <fa-icon [icon]="['fab','telegram-plane']" size="lg"></fa-icon>
+      </a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

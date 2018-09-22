@@ -18,6 +18,8 @@ import { AuthInterceptor } from '../auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoggingInterceptor } from '../shared/logging.interceptor';
 import { NguCarouselModule } from '@ngu/carousel';
+import { DefaultToolbarComponent } from './default-toolbar/default-toolbar.component';
+import { DefaultSidenavComponent } from './default-sidenav/default-sidenav.component';
 
 @NgModule({
   declarations: [
@@ -30,13 +32,13 @@ import { NguCarouselModule } from '@ngu/carousel';
     BestProductComponent,
     BombProductsComponent,
     CategoriesCarouselComponent,
-    CategoryProductsComponent
+    CategoryProductsComponent,
+    DefaultToolbarComponent,
+    DefaultSidenavComponent
   ],
   imports: [SharedModule, NguCarouselModule, AppRoutingModule],
   exports: [AppRoutingModule, NguCarouselModule, CategoryItemComponent, FooterComponent],
   providers: [
-    AuthService,
-    UIService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }

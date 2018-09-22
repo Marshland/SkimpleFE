@@ -1,12 +1,12 @@
 <section>
-  <form #f="ngForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" (ngSubmit)="f.onSubmit()">
+  <form #f="ngForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" (ngSubmit)="onSubmit(f)">
     <mat-form-field>
-      <input type="email" matInput placeholder="Email" name="email" ngModel #emailInput="ngModel">
-      <mat-error *ngIf="emailInput.hasError('required')">Il campo è obbligatorio.</mat-error>
+      <input type="email" email matInput placeholder="Email" name="email" ngModel #emailInput="ngModel">
       <mat-error *ngIf="!emailInput.hasError('required')">Email non valida.</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input type="password" matInput placeholder="Password" name="password" ngModel #pwInput="ngModel" required>
+      <input type="password" matInput placeholder="Password" name="password" minlength="6" ngModel #pwInput="ngModel"
+        required>
       <mat-hint>Inserisci la tua password</mat-hint>
       <mat-error>Password errata</mat-error>
     </mat-form-field>

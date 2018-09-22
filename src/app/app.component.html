@@ -1,49 +1,16 @@
-<div class="container mat-typography" [class.is-mobile]="mobileQuery.matches">
-  <mat-toolbar class="toolbar">
-    <mat-toolbar-row>
-      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-      <a mat-button routerLink="/">
-        <img src="./assets/images/skimple.svg">
-      </a>
+<div class="container mat-typography" [ngClass]="{'is-mobile': isMobile}">
+  <router-outlet name="toolbar"></router-outlet>
 
-      <a *ngIf="!(isAuth$ | async)" fxShow fxHide.xs="true" mat-button routerLink="/signup">Registrati</a>
-      <a *ngIf="!(isAuth$ | async)" fxShow fxHide.xs="true" mat-button routerLink="/login">Login</a>
-      <a *ngIf="isAuth$ | async" fxShow fxHide.xs="true" mat-button (click)="onLogout()">Logout</a>
-
-      <div fxFlex fxLayoutAlign="end center">
-        <a mat-icon-button aria-label="Facebook" class="facebook-icon">
-          <fa-icon [icon]="['fab','facebook-f']" size="lg"></fa-icon>
-        </a>
-        <a mat-icon-button aria-label="Twittwe" class="twitter-icon">
-          <fa-icon [icon]="['fab','twitter']" size="lg"></fa-icon>
-        </a>
-        <a mat-icon-button aria-label="Instagram" class="instagram-icon">
-          <fa-icon [icon]="['fab','instagram']" size="lg"></fa-icon>
-        </a>
-        <a mat-icon-button aria-label="Telegram" class="telegram-icon">
-          <fa-icon [icon]="['fab','telegram-plane']" size="lg"></fa-icon>
-        </a>
-      </div>
-    </mat-toolbar-row>
-    <mat-toolbar-row fxHide fxShow.xs="true" [ngClass]="{'shrink-toolbar': shrinkToolbar || snav.opened}">
-      <a *ngIf="!(isAuth$ | async)" mat-button routerLink="/signup">Registrati</a>
-      <a *ngIf="!(isAuth$ | async)" mat-button routerLink="/login">Login</a>
-      <a *ngIf="isAuth$ | async" mat-button style="cursor: pointer" (click)="onLogout()">Logout</a>
-    </mat-toolbar-row>
-  </mat-toolbar>
-
-  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-      <h2 class="category-title">Categorie</h2>
-      <mat-nav-list>
-        <app-category-item [categories]="categories"></app-category-item>
-      </mat-nav-list>
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="fixedToTop">
+    <mat-sidenav #snav [mode]="sidenavMode" [fixedInViewport]="isMobile" [fixedTopGap]="fixedToTop">
+      <router-outlet name="sidenav"></router-outlet>
     </mat-sidenav>
 
-    <mat-sidenav-content>
-      <router-outlet></router-outlet>
+    <mat-sidenav-content fxLayout="column" fxLayoutAlign="space-between">
+      <main>
+        <router-outlet></router-outlet>
+      </main>
       <app-footer></app-footer>
     </mat-sidenav-content>
-
   </mat-sidenav-container>
 </div>

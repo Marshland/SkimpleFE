@@ -1,0 +1,18 @@
+<mat-toolbar class="toolbar">
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="toggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a mat-button routerLink="/admin">
+      <img src="./assets/images/skimple.svg">
+    </a>
+    <a *ngIf="isAuth$ | async" fxShow fxHide.xs="true" mat-button (click)="logout()">Logout</a>
+
+    <div fxFlex fxLayoutAlign="end center">
+      <a fxShow fxHide.xs="true" mat-button routerLink="/">Ritorna al sito</a>
+    </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row fxHide fxShow.xs="true" [ngClass]="{'shrink-toolbar': isSidenavOpened}">
+    <a *ngIf="isAuth$ | async" mat-button style="cursor: pointer" (click)="logout()">Logout</a>
+  </mat-toolbar-row>
+</mat-toolbar>

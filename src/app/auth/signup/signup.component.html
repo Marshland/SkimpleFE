@@ -5,7 +5,7 @@
       <mat-error *ngIf="emailInput.hasError('required')">Il campo è obbligatorio.</mat-error>
       <mat-error *ngIf="!emailInput.hasError('required')">Email non valida.</mat-error>
     </mat-form-field>
-    <mat-form-field hintLabel="Deve esser di almeno 6 caratteri.">
+    <mat-form-field>
       <input type="password" matInput placeholder="Password" ngModel name="password" required minlength="6" #pwInput="ngModel">
       <mat-hint fxFlexAlign="end">{{ pwInput.value?.length }} / 6</mat-hint>
       <mat-error>La password deve contenere almeno 6 caratteri.</mat-error>

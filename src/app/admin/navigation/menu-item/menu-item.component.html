@@ -1,0 +1,12 @@
+<ng-container *ngFor="let menuItem of menuItems">
+  <mat-list-item [attr.deepLevel]="deepLevel">
+    <mat-icon mat-list-icon>{{menuItem.icon}}</mat-icon>
+    <a matLine [routerLink]="menuItem.url">{{ menuItem.title }}</a>
+    <ng-container *ngIf="menuItem.children?.length > 0">
+      <button mat-icon-button (click)="showChildren = !showChildren">
+        <mat-icon class="accordion" [ngClass]="{'opened': showChildren}">arrow_forward_ios</mat-icon>
+      </button>
+    </ng-container>
+  </mat-list-item>
+  <app-menu-item *ngIf="menuItem.children && showChildren" [menuItems]="menuItem.children" [deepLevel]="deepLevel + 1"></app-menu-item>
+</ng-container>

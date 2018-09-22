@@ -12,7 +12,7 @@ import { of } from 'rxjs';
 @Injectable()
 export class AuthEffects {
   @Effect()
-  authSignup = this.actions$.pipe(
+  authTrySignup = this.actions$.pipe(
     ofType(AuthActions.TRY_SIGNUP),
     map((action: AuthActions.TrySignup) => {
       return action.payload;
@@ -20,6 +20,7 @@ export class AuthEffects {
     switchMap((authData: AuthData) => {
       return this.authService.registerUser(authData).pipe(
         map((user: User) => {
+          this.router.navigate(['/']);
           return {
             type: AuthActions.SIGNUP,
             payload: user
@@ -31,18 +32,16 @@ export class AuthEffects {
   );
 
   @Effect()
-  authSignin = this.actions$.pipe(
+  authTrySignin = this.actions$.pipe(
     ofType(AuthActions.TRY_SIGNIN),
-    map((action: AuthActions.TrySignup) => {
+    map((action: AuthActions.TrySignin) => {
       return action.payload;
     }),
     switchMap((authData: AuthData) => {
       return this.authService.login(authData).pipe(
         map((user: User) => {
-          return {
-            type: AuthActions.SIGNUP,
-            payload: user
-          };
+          this.router.navigate(['/']);
+          return { type: AuthActions.SIGNIN, payload: user };
         }),
         catchError(() => of({ type: AuthActions.Error }))
       );

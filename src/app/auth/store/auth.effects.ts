@@ -21,12 +21,9 @@ export class AuthEffects {
       return this.authService.registerUser(authData).pipe(
         map((user: User) => {
           this.router.navigate(['/']);
-          return {
-            type: AuthActions.SIGNUP,
-            payload: user
-          };
+          return new AuthActions.Signup(user);
         }),
-        catchError(() => of({ type: AuthActions.Error }))
+        catchError(() => of(new AuthActions.Error()))
       );
     })
   );
@@ -40,10 +37,11 @@ export class AuthEffects {
     switchMap((authData: AuthData) => {
       return this.authService.login(authData).pipe(
         map((user: User) => {
+          console.log(user);
           this.router.navigate(['/']);
-          return { type: AuthActions.SIGNIN, payload: user };
+          return new AuthActions.Signin(user);
         }),
-        catchError(() => of({ type: AuthActions.Error }))
+        catchError(() => of(new AuthActions.Error()))
       );
     })
   );

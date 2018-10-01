@@ -1,1 +1,1 @@
-export const environment = { production: true, apiPath: 'http://localhost:4200' };
+export const environment = { production: true, apiPath: 'https://skimple-api.herokuapp.com' };

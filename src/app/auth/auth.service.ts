@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   registerUser(data: AuthData): Observable<User> {
-    // this.httpClient.post(`${environment.apiPath}/register`, data);
+    // return this.httpClient.post<User>(`${environment.apiPath}/register`, data);
     return of({
       id: 'feu9rhf8reh',
       email: 'skimple@skimple.it',
@@ -39,17 +39,18 @@ export class AuthService {
     });
   }
 
-  login(data: AuthData) {
-    // this.httpClient.post(`${environment.apiPath}/login`, data);
-    return of({
-      id: 'feu9rhf8reh',
-      email: 'skimple@skimple.it',
-      token: 'aaaaaaaaaaaaaaaaaaa',
-      expireIn: moment()
-        .add(2, 'hours')
-        .get('seconds'),
-      isAdmin: true
-    });
+  login(data: AuthData): Observable<User> {
+    return this.httpClient.post<User>(`${environment.apiPath}/login`, data);
+
+    // return of({
+    //   id: 'feu9rhf8reh',
+    //   email: 'skimple@skimple.it',
+    //   token: 'aaaaaaaaaaaaaaaaaaa',
+    //   expireIn: moment()
+    //     .add(2, 'hours')
+    //     .get('seconds'),
+    //   isAdmin: true
+    // });
   }
 
   private getUserFromToken(token: string) {

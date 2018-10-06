@@ -1,14 +1,13 @@
 <section>
   <form #f="ngForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" (ngSubmit)="onSubmit(f)">
     <mat-form-field>
-      <input type="text" matInput placeholder="Email" name="email" ngModel #emailInput="ngModel" required>
-      <!-- <mat-error *ngIf="!emailInput.hasError('required')">Email non valida.</mat-error> -->
+      <input type="email" email matInput placeholder="Email" name="email" ngModel #emailInput="ngModel" required>
+      <mat-error>Email non valida.</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input type="password" matInput placeholder="Password" name="password" minlength="5" ngModel #pwInput="ngModel"
+      <input type="password" matInput placeholder="Password" name="password" minlength="6" ngModel #pwInput="ngModel"
         required>
-      <mat-hint>Inserisci la tua password</mat-hint>
-      <mat-error>Password errata</mat-error>
+      <mat-error>Password troppo corta errata</mat-error>
     </mat-form-field>
     <button *ngIf="!(isLoading$ | async)" type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Login</button>
     <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>

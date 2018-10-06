@@ -10,14 +10,28 @@ import { AdminToolbarComponent } from './admin-toolbar/admin-toolbar.component';
 const adminRoutes: Routes = [
   {
     path: '',
-    component: DashboardComponent,
     children: [
-      { path: 'search-products', component: SearchProductsComponent },
-      { path: 'build-categories', component: BuildCategoriesComponent }
+      { path: '', component: DashboardComponent },
+      { path: '', component: AdminSidenavComponent, outlet: 'sidenav' },
+      { path: '', component: AdminToolbarComponent, outlet: 'toolbar' }
     ]
   },
-  { path: '', component: AdminSidenavComponent, outlet: 'sidenav' },
-  { path: '', component: AdminToolbarComponent, outlet: 'toolbar' }
+  {
+    path: 'search-products',
+    children: [
+      { path: '', component: SearchProductsComponent },
+      { path: '', component: AdminSidenavComponent, outlet: 'sidenav' },
+      { path: '', component: AdminToolbarComponent, outlet: 'toolbar' }
+    ]
+  },
+  {
+    path: 'build-categories',
+    children: [
+      { path: '', component: BuildCategoriesComponent },
+      { path: '', component: AdminSidenavComponent, outlet: 'sidenav' },
+      { path: '', component: AdminToolbarComponent, outlet: 'toolbar' }
+    ]
+  }
 ];
 
 @NgModule({

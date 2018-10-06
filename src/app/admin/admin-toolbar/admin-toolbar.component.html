@@ -6,13 +6,16 @@
     <a mat-button routerLink="/admin">
       <img src="./assets/images/skimple.svg">
     </a>
-    <a *ngIf="isAuth$ | async" fxShow fxHide.xs="true" mat-button (click)="logout()">Logout</a>
 
     <div fxFlex fxLayoutAlign="end center">
-      <a fxShow fxHide.xs="true" mat-button routerLink="/">Ritorna al sito</a>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <a routerLink="/" routerLinkActive="router-link-active" mat-menu-item>Ritorna al sito</a>
+        <a mat-menu-item (click)="logout()">Logout</a>
+      </mat-menu>
     </div>
-  </mat-toolbar-row>
-  <mat-toolbar-row fxHide fxShow.xs="true" [ngClass]="{'shrink-toolbar': isSidenavOpened}">
-    <a *ngIf="isAuth$ | async" mat-button style="cursor: pointer" (click)="logout()">Logout</a>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -37,7 +37,6 @@ export class AuthEffects {
     switchMap((authData: AuthData) => {
       return this.authService.login(authData).pipe(
         map((user: User) => {
-          console.log(user);
           this.router.navigate(['/']);
           return new AuthActions.Signin(user);
         }),

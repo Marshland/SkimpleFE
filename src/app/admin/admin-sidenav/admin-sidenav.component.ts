@@ -10,12 +10,12 @@ export class AdminSidenavComponent implements OnInit {
   menuItems: Partial<MenuItem>[] = [
     {
       title: 'Ricerca prodotti',
-      url: '/search-products',
+      url: 'search-products',
       icon: 'search'
     },
     {
       title: 'Categorie',
-      url: '/build-categories',
+      url: 'build-categories',
       icon: 'category'
     }
   ];

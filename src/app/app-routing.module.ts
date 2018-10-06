@@ -1,14 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, UrlSegment } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './core/home/home.component';
 import { DefaultSidenavComponent } from './core/default-sidenav/default-sidenav.component';
 import { DefaultToolbarComponent } from './core/default-toolbar/default-toolbar.component';
 import { AuthGuard } from './auth/auth-guard.service';
-
-export function adminSection(url: UrlSegment[]) {
-  console.log(url);
-  return url.length === 1 && url[0].path.endsWith('admin') ? null : { consumed: url };
-}
 
 const routes: Routes = [
   {

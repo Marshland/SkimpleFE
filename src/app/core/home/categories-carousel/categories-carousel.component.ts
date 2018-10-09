@@ -16,6 +16,7 @@ export class CategoriesCarouselComponent implements OnInit {
 
   ngOnInit() {
     this.categories = [
+      { title: 'Industria e Scienza', imgPath: './assets/images/categories/industria_scienza.svg', icon: 'industry-science' },
       { title: 'Alimentari', imgPath: './assets/images/categories/food.png' },
       { title: 'Salute e cura della Persona', imgPath: './assets/images/categories/perfume.png' },
       { title: 'pulizia e cura della casa', imgPath: './assets/images/categories/cleaning.png' },

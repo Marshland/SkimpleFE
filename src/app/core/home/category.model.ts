@@ -5,6 +5,7 @@ export interface Category {
   title: string;
   parentId: number;
   imgPath?: string;
+  icon?: string;
   children?: Category[];
   products?: Product[];
 }

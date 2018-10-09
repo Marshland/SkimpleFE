@@ -14,8 +14,7 @@ const routes: Routes = [
       { path: '', component: DefaultToolbarComponent, outlet: 'toolbar' }
     ]
   },
-  { path: 'admin', loadChildren: './admin/admin.module#AdminModule' }
-  // { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canLoad: [AuthGuard] }
+  { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canLoad: [AuthGuard] }
 ];
 
 @NgModule({

@@ -11,7 +11,8 @@ export interface State {
 const initialState: State = {
   filter: {
     keywords: '',
-    searchIndex: 'All'
+    searchIndex: 'All',
+    merchantId: null
   },
   products: [],
   isLoading: false

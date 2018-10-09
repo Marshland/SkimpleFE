@@ -1,6 +1,7 @@
 import { Injectable, ChangeDetectorRef } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav, MatIconRegistry } from '@angular/material';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,13 @@ export class LayoutService {
   private _mobileQueryListener: () => void;
   private _fixToTop = 56;
 
-  constructor(private media: MediaMatcher) {}
+  constructor(private media: MediaMatcher, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {}
 
   init(changeDetectorRef: ChangeDetectorRef) {
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    this.registerCustomIcon();
   }
 
   get mobileQueryMatches(): boolean {
@@ -37,5 +39,12 @@ export class LayoutService {
 
   removeListener() {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  private registerCustomIcon() {
+    this.matIconRegistry.addSvgIcon(
+      'industry-science',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/categories/industria_scienza.svg')
+    );
   }
 }

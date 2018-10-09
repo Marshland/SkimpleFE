@@ -39,7 +39,7 @@ import { DefaultSidenavComponent } from './default-sidenav/default-sidenav.compo
   imports: [SharedModule, NguCarouselModule, AppRoutingModule],
   exports: [AppRoutingModule, NguCarouselModule, CategoryItemComponent, FooterComponent],
   providers: [
-    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }
   ]

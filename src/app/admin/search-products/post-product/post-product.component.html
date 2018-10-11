@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>{{passedData.product.title}}</h1>
+<mat-dialog-content>
+  <div *ngIf="passedData.product.multimedia && passedData.product.multimedia.length > 1">
+    <a [href]="passedData.product.url" target="_blank">
+      <img [src]="passedData.product.multimedia[1].uri" [title]="passedData.product.title" />
+    </a>
+  </div>
+  <form #f="ngForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <mat-checkbox name="flgTest" [(ngModel)]="model.flgTest">Pubblica in TEST</mat-checkbox>
+    <mat-form-field>
+      <textarea type="text" matInput placeholder="Testo" name="text" [(ngModel)]="model.post.text" required></textarea>
+      <mat-error>Inserire una descrizione.</mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-chip-list">
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let tag of model.post.hashtags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
+          {{tag}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Aggiungi Tag" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Link Sx" name="linkSx" [(ngModel)]="model.post.linkSx">
+    </mat-form-field>
+    <p>www.example.it</p>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Link Dx" name="linkDx" [(ngModel)]="model.post.linkDx">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" [disabled]="f.invalid" [mat-dialog-close]="model">Pubblica</button>
+  <button type="button" mat-raised-button color="accent" [mat-dialog-close]="null">Annulla</button>
+</mat-dialog-actions>

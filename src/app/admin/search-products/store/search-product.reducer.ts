@@ -6,16 +6,17 @@ export interface State {
   filter: AdminSearchProductFilter;
   products: AdminSearchProduct[];
   isLoading: boolean;
+  isPostingProduct: boolean;
 }
 
 const initialState: State = {
   filter: {
     keywords: '',
-    searchIndex: 'All',
-    merchantId: null
+    searchIndex: 'All'
   },
   products: [],
-  isLoading: false
+  isLoading: false,
+  isPostingProduct: false
 };
 
 export function adminSearchProductReducer(state = initialState, action: AdminSearchProductActions.AdminSearchProductActions) {
@@ -26,8 +27,12 @@ export function adminSearchProductReducer(state = initialState, action: AdminSea
       return { ...state, isLoading: true };
     case AdminSearchProductActions.FETCHED_PRODUCTS:
       return { ...state, products: action.payload, isLoading: false };
+    case AdminSearchProductActions.POST_PRODUCT:
+      return { ...state, isPostingProduct: true };
+    case AdminSearchProductActions.POSTED_PRODUCT:
+      return { ...state, isPostingProduct: false };
     case AdminSearchProductActions.ERROR:
-      return { ...state, isLoading: false };
+      return { ...state, isLoading: false, isPostingProduct: false };
     default:
       return state;
   }
@@ -36,3 +41,4 @@ export function adminSearchProductReducer(state = initialState, action: AdminSea
 export const getFilter = (state: State) => state.filter;
 export const getProducts = (state: State) => state.products;
 export const getIsLoading = (state: State) => state.isLoading;
+export const getIsPostingProduct = (state: State) => state.isPostingProduct;

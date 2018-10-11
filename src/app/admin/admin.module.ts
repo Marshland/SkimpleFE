@@ -16,6 +16,7 @@ import { AdminSearchProductEffects } from './search-products/store/search-produc
 import { adminCategoriesReducer } from './build-categories/store/categories.reducer';
 import { AdminCategoriesEffects } from './build-categories/store/categories.effects';
 import { BuildCategoryService } from './build-categories/build-categories.service';
+import { PostProductComponent } from './search-products/post-product/post-product.component';
 
 @NgModule({
   imports: [
@@ -31,8 +32,10 @@ import { BuildCategoryService } from './build-categories/build-categories.servic
     AdminToolbarComponent,
     SearchProductsComponent,
     BuildCategoriesComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    PostProductComponent
   ],
-  providers: [AdminSearchProductService, BuildCategoryService]
+  providers: [AdminSearchProductService, BuildCategoryService],
+  entryComponents: [PostProductComponent]
 })
 export class AdminModule {}

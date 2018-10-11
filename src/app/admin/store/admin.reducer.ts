@@ -10,9 +10,10 @@ export interface AdminFeatureState extends fromApp.AppState {
 }
 
 export const getAdminSearchProductState = createFeatureSelector<fromAdminSearchProduct.State>('adminSearchProduct');
-export const getIsLoadingAdminProducts = createSelector(getAdminSearchProductState, fromAdminSearchProduct.getIsLoading);
 export const getAdminProductFilter = createSelector(getAdminSearchProductState, fromAdminSearchProduct.getFilter);
+export const getIsLoadingAdminProducts = createSelector(getAdminSearchProductState, fromAdminSearchProduct.getIsLoading);
 export const getAdminProducts = createSelector(getAdminSearchProductState, fromAdminSearchProduct.getProducts);
+export const getIsPostingProduct = createSelector(getAdminSearchProductState, fromAdminSearchProduct.getIsPostingProduct);
 
 export const getAdminCategoriesState = createFeatureSelector<fromAdminCategories.State>('adminCategories');
 export const getIsLoadingCateoryProviders = createSelector(getAdminCategoriesState, fromAdminCategories.getIsLoadingCateoryProviders);

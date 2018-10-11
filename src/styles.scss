@@ -57,6 +57,27 @@ body {
     height: 30px;
     line-height: 30px;
   }
+
+  mat-cell:first-child,
+  mat-footer-cell:first-child,
+  mat-header-cell:first-child {
+    padding-left: unset !important;
+  }
+
+  mat-cell:last-child,
+  mat-footer-cell:last-child,
+  mat-header-cell:last-child {
+    padding-right: unset !important;
+  }
+
+  .mat-cell,
+  .mat-footer-cell {
+    font-size: 12px;
+
+    .mat-icon {
+      font-size: 18px;
+    }
+  }
 }
 
 .mat-toolbar-row {

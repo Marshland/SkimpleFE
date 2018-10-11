@@ -59,34 +59,31 @@ export class SearchProductsComponent implements OnInit, AfterViewInit {
       if (!data) {
         return;
       }
-      switch (filter) {
-        case 'price':
-          let hasMin = false;
-          let hasMax = false;
-          if (data.offerPrice && this.minPrice > 0) {
-            hasMin = data.offerPrice >= this.minPrice;
-          } else if (data.price && this.minPrice > 0) {
-            hasMin = data.price >= this.minPrice;
-          }
-          if (data.offerPrice && this.maxPrice > 0) {
-            hasMax = data.offerPrice <= this.maxPrice;
-          } else if (data.price && this.maxPrice > 0) {
-            hasMax = data.price <= this.maxPrice;
-          }
-          return this.maxPrice > 0 && this.minPrice > 0 ? hasMin && hasMax : hasMin || hasMax;
-        case 'title':
-          return (
-            this.getProductCategory(data)
-              .toLowerCase()
-              .indexOf(this.title) > -1 || data.title.toLowerCase().indexOf(this.title) > -1
-          );
-        default:
-          return (
-            this.getProductCategory(data)
-              .toLowerCase()
-              .indexOf(this.title) > -1 || data.title.toLowerCase().indexOf(this.title) > -1
-          );
+      this.title = this.title.trim();
+
+      let hasMin = true;
+      let hasMax = true;
+      let hasTitleOrCategory = true;
+
+      if (data.offerPrice && this.minPrice > 0) {
+        hasMin = data.offerPrice >= this.minPrice;
+      } else if (data.price && this.minPrice > 0) {
+        hasMin = data.price >= this.minPrice;
       }
+      if (data.offerPrice && this.maxPrice > 0) {
+        hasMax = data.offerPrice <= this.maxPrice;
+      } else if (data.price && this.maxPrice > 0) {
+        hasMax = data.price <= this.maxPrice;
+      }
+
+      if (this.title !== '') {
+        hasTitleOrCategory =
+          this.getProductCategory(data)
+            .toLowerCase()
+            .indexOf(this.title) > -1 || data.title.toLowerCase().indexOf(this.title) > -1;
+      }
+
+      return (this.maxPrice > 0 && this.minPrice > 0 ? hasMin && hasMax : hasMin || hasMax) && hasTitleOrCategory;
     };
   }
 

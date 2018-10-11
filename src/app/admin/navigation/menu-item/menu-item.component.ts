@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MenuItem } from '../menu-item.model';
+import { LayoutService } from 'src/app/shared/layout.service';
 
 @Component({
   selector: 'app-menu-item',
@@ -15,7 +16,11 @@ export class MenuItemComponent implements OnInit {
 
   showChildren = false;
 
-  constructor() {}
+  constructor(private layoutService: LayoutService) {}
 
   ngOnInit() {}
+
+  onSelectItem() {
+    this.layoutService.sidenav.toggle();
+  }
 }

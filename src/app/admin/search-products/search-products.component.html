@@ -1,5 +1,5 @@
 <section>
-  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="doSearchProduct(f)">
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="doSearchProduct()">
     <mat-form-field *ngIf="!(isLoadingCateoryProviders$ | async)">
       <mat-select placeholder="Categoria" name="category" [(ngModel)]="filter.searchIndex" required>
         <mat-option *ngFor="let category of (categoryProviders$ | async)" [value]="category.providerCategoryDesc">

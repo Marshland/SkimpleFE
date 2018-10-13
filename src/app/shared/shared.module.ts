@@ -14,10 +14,11 @@ library.add(fab);
 import { MaterialModule } from '../material/material.module';
 import { ShareButtonComponent } from './share-button/share-button.component';
 import { SearchComponent } from './search/search.component';
+import { StopPropagationDirective } from './click-stop.directive';
 
 @NgModule({
-  declarations: [ShareButtonComponent, SearchComponent],
+  declarations: [ShareButtonComponent, SearchComponent, StopPropagationDirective],
   imports: [CommonModule, FormsModule, MaterialModule, FlexLayoutModule, FontAwesomeModule],
-  exports: [CommonModule, FormsModule, MaterialModule, FlexLayoutModule, FontAwesomeModule, ShareButtonComponent]
+  exports: [CommonModule, FormsModule, MaterialModule, FlexLayoutModule, FontAwesomeModule, ShareButtonComponent, StopPropagationDirective]
 })
 export class SharedModule {}

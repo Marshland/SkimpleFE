@@ -2,6 +2,7 @@ import { Injectable, ChangeDetectorRef } from '@angular/core';
 import { MatSidenav, MatIconRegistry } from '@angular/material';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,17 @@ export class LayoutService {
   private _mobileQueryListener: () => void;
   private _fixToTop = 56;
 
+  private _mobileQueryChange = new BehaviorSubject<boolean>(false);
+  mobileQueryChange$ = this._mobileQueryChange.asObservable();
+
   constructor(private media: MediaMatcher, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {}
 
   init(changeDetectorRef: ChangeDetectorRef) {
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this._mobileQueryListener = () => {
+      this._mobileQueryChange.next(this.mobileQuery.matches);
+      changeDetectorRef.detectChanges();
+    };
     this.mobileQuery.addListener(this._mobileQueryListener);
     this.registerCustomIcon();
   }

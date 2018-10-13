@@ -24,6 +24,7 @@ export interface AdminSearchProduct {
   summary?: string;
   price: number;
   offerPrice: number;
+  ratio?: number;
   provider: Provider;
   url: string;
   createDate?: Date;

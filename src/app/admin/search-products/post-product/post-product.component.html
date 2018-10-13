@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Post su <fa-icon [icon]="['fab','telegram-plane']" class="telegram-icon" size="lg"></fa-icon>
 </h1>
 <mat-dialog-content>
-  <div *ngIf="passedData.product.multimedia && passedData.product.multimedia.length > 1">
+  <div *ngIf="passedData.product.multimedia && passedData.product.multimedia.length > 1" class="text-center">
     <a [href]="passedData.product.url" target="_blank">
       <img [src]="passedData.product.multimedia[1].uri" [title]="passedData.product.title" />
     </a>

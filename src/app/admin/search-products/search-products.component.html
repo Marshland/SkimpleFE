@@ -8,7 +8,7 @@
       </mat-select>
     </mat-form-field>
     <mat-spinner *ngIf="isLoadingCateoryProviders$ | async"></mat-spinner>
-    <mat-form-field>
+    <mat-form-field fxFlex="80%">
       <input matInput type="text" name="keywords" placeholder="Parola chiave" [(ngModel)]="filter.keywords" required>
       <mat-hint class="text-center">Ricerca su Amazon</mat-hint>
     </mat-form-field>

@@ -19,7 +19,7 @@
 
 <mat-divider></mat-divider>
 
-<section *ngIf="dataSource.data.length > 0">
+<section [hidden]="dataSource.data.length === 0">
 
   <div fxLayout="row" class="filters" fxLayoutAlign="space-around end">
     <mat-form-field fxFlex="80%">
@@ -152,6 +152,4 @@
     <mat-row *matRowDef="let row; columns: ['expandedDetail'];" class="detail-row" [class.expanded-detail]="expandedElement === row"></mat-row>
   </mat-table>
 
-  <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 50]">
-  </mat-paginator>
 </section>

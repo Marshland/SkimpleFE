@@ -1,6 +1,6 @@
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { UIService } from './ui.service';

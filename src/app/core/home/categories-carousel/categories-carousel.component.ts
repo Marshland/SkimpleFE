@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Category } from '../category.model';
-import { NguCarousel, NguCarouselService, NguCarouselStore } from '@ngu/carousel';
+import { NguCarousel, NguCarouselConfig } from '@ngu/carousel';
 
 @Component({
   selector: 'app-categories-carousel',
@@ -9,10 +9,12 @@ import { NguCarousel, NguCarouselService, NguCarouselStore } from '@ngu/carousel
 })
 export class CategoriesCarouselComponent implements OnInit {
   categories: Partial<Category>[];
-  carouselTile: NguCarousel;
-  private carouselToken: string;
+  carouselTile: NguCarouselConfig;
 
-  constructor(private carousel: NguCarouselService) {}
+  @ViewChild('carousel')
+  carousel: NguCarousel<any>;
+
+  constructor() {}
 
   ngOnInit() {
     this.categories = [
@@ -41,11 +43,7 @@ export class CategoriesCarouselComponent implements OnInit {
     };
   }
 
-  initDataFn(key: NguCarouselStore) {
-    this.carouselToken = key.token;
-  }
-
   moveToSlide() {
-    this.carousel.moveToSlide(this.carouselToken, 2, false);
+    this.carousel.moveTo(2, false);
   }
 }

@@ -1,12 +1,8 @@
-<ngu-carousel [inputs]="carouselBanner">
+<ngu-carousel [inputs]="carouselBanner" [dataSource]="carouselBanners">
 
-  <ngu-item NguCarouselItem class="bannerStyle">
-    <img src="./assets/images/banner/banner_1.svg">
-  </ngu-item>
-
-  <ngu-item NguCarouselItem class="bannerStyle">
-    <img src="./assets/images/banner/banner_2.png">
-  </ngu-item>
+  <ngu-tile *nguCarouselDef="let item" class="banner">
+    <img [src]="item">
+  </ngu-tile>
 
   <button NguCarouselPrev mat-icon-button class="leftRs" color="accent">
     <mat-icon>arrow_back_ios</mat-icon>
@@ -14,4 +10,5 @@
   <button NguCarouselNext mat-icon-button class="rightRs" color="accent">
     <mat-icon>arrow_forward_ios</mat-icon>
   </button>
+
 </ngu-carousel>

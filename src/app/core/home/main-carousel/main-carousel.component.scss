@@ -1,16 +1,15 @@
 @import 'variables';
 
-.bannerStyle {
-  background-color: transparent;
-  text-align: center;
-
+.banner {
   img {
     max-width: 100%;
   }
 }
 
-:host ::ng-deep .ngucarouselPoint li {
-  background: $skimple-blue !important;
+:host ::ng-deep {
+  .tile {
+    box-shadow: none !important;
+  }
 }
 
 .leftRs {

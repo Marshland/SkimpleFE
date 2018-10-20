@@ -1,13 +1,12 @@
 <mat-card class="categories-carousel">
+
   <h1 mat-card-title>Categorie in evidenza</h1>
-  <ngu-carousel mat-card-content [inputs]="carouselTile" (initData)="initDataFn($event)">
-    <ngu-tile NguCarouselItem *ngFor="let category of categories" class="categoryStyle">
-      <ng-container *ngIf="category.icon">
-        <mat-icon [svgIcon]="category.icon"></mat-icon>
-      </ng-container>
-      <ng-container *ngIf="!category.icon">
-        <img [src]="category.imgPath">
-      </ng-container>
+
+  <ngu-carousel mat-card-content [inputs]="carouselTile" [dataSource]="categories">
+
+    <ngu-tile *nguCarouselDef="let category" class="category">
+      <mat-icon *ngIf="category.icon" [svgIcon]="category.icon"></mat-icon>
+      <img *ngIf="!category.icon" [src]="category.imgPath">
       <h1>{{category.title}}</h1>
     </ngu-tile>
 

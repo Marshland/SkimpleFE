@@ -15,6 +15,7 @@ export interface Category {
 export interface Multimedia {
   id: number;
   uri: string;
+  type: number;
 }
 
 export interface AdminSearchProduct {

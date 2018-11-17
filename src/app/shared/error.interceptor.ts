@@ -15,12 +15,17 @@ export class ErrorInterceptor implements HttpInterceptor {
         event => {},
         err => {
           console.log(err);
-          if (err.status === 404) {
-            const router = this._injector.get(Router);
-            router.navigate(['/404']);
-          } else {
-            const uiService = this._injector.get(UIService);
-            uiService.showSnackbar(err.message, null, 3000);
+          const router = this._injector.get(Router);
+          switch (err.status) {
+            case 401:
+              router.navigate(['/login']);
+              break;
+            case 404:
+              router.navigate(['/not-found']);
+              break;
+            default:
+              const uiService = this._injector.get(UIService);
+              uiService.showSnackbar(err.message, null, 3000);
           }
         }
       )

@@ -11,15 +11,13 @@ import { CategoriesCarouselComponent } from './home/categories-carousel/categori
 import { CategoryProductsComponent } from './home/category-products/category-products.component';
 import { SharedModule } from '../shared/shared.module';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
-import { AuthService } from '../auth/auth.service';
-import { UIService } from '../shared/ui.service';
 import { AppRoutingModule } from '../app-routing.module';
-import { AuthInterceptor } from '../auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoggingInterceptor } from '../shared/logging.interceptor';
 import { NguCarouselModule } from '@ngu/carousel';
 import { DefaultToolbarComponent } from './default-toolbar/default-toolbar.component';
 import { DefaultSidenavComponent } from './default-sidenav/default-sidenav.component';
+import { ErrorInterceptor } from '../shared/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,8 +37,9 @@ import { DefaultSidenavComponent } from './default-sidenav/default-sidenav.compo
   imports: [SharedModule, NguCarouselModule, AppRoutingModule],
   exports: [AppRoutingModule, NguCarouselModule, CategoryItemComponent, FooterComponent],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }
   ]
 })

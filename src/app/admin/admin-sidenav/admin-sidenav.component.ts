@@ -17,6 +17,11 @@ export class AdminSidenavComponent implements OnInit {
       title: 'Categorie',
       url: 'build-categories',
       icon: 'category'
+    },
+    {
+      title: 'Schedulazione job',
+      url: 'scheduler',
+      icon: 'settings_backup_restore'
     }
   ];
   constructor() {}

@@ -3,7 +3,7 @@ import { AdminSearchProductFilter } from '../search-product-filter.model';
 import { AdminSearchProduct } from '../search-product.model';
 import { PostProductRequest } from '../post-product.model';
 
-export const SET_FILTER = '[Admin search products] Set Token';
+export const SET_FILTER = '[Admin search products] Set Filter';
 export const FETCH_PRODUCTS = '[Admin search products] Fetch Products';
 export const FETCHED_PRODUCTS = '[Admin search products] Fetched Products';
 export const POST_PRODUCT = '[Admin search products] Post Product';

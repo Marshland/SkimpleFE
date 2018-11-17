@@ -9,7 +9,13 @@ export interface State {
 
 const initialState: State = {
   token: null,
-  user: null,
+  user: {
+    id: 'feu9rhf8reh',
+    email: 'skimple@skimple.it',
+    token: 'aaaaaaaaaaaaaaaaaaa',
+    expireIn: 9999,
+    isAdmin: true
+  },
   isLoading: false
 };
 

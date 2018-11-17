@@ -17,6 +17,7 @@ import { adminCategoriesReducer } from './build-categories/store/categories.redu
 import { AdminCategoriesEffects } from './build-categories/store/categories.effects';
 import { BuildCategoryService } from './build-categories/build-categories.service';
 import { PostProductComponent } from './search-products/post-product/post-product.component';
+import { SchedulerComponent } from './scheduler/scheduler.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { PostProductComponent } from './search-products/post-product/post-produc
     SearchProductsComponent,
     BuildCategoriesComponent,
     MenuItemComponent,
-    PostProductComponent
+    PostProductComponent,
+    SchedulerComponent
   ],
   providers: [AdminSearchProductService, BuildCategoryService],
   entryComponents: [PostProductComponent]

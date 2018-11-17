@@ -91,16 +91,19 @@
           invece di<br />
           {{ element.price || 0 | currency: 'EUR' }}
         </ng-container>
-        <ng-container *ngIf="!element.offerPrice"> '-' </ng-container>
+        <ng-container *ngIf="!element.offerPrice">{{ element.price || 0 | currency: 'EUR' }}</ng-container>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="ratio">
       <mat-header-cell *matHeaderCellDef mat-sort-header>€ risparmiati</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        {{ element.ratio || 0 | currency: 'EUR' }}<br />
-        con sconto del<br />
-        {{ element.percentageSaved || 0 }}%
+        <ng-container *ngIf="element.ratio">
+          {{ element.ratio || 0 | currency: 'EUR' }}<br />
+          con sconto del<br />
+          {{ element.percentageSaved || 0 }}%
+        </ng-container>
+        <ng-container *ngIf="!element.ratio">{{ element.price || 0 | currency: 'EUR' }}</ng-container>
       </mat-cell>
     </ng-container>
 
@@ -128,8 +131,8 @@
             <div>Categoria: {{ getProductCategory(element) }}</div>
             <div>
               Prezzo: {{ element.price || 0 | currency: 'EUR' }}<br />
-              Prezzo offerta: {{ element.offerPrice || 0 | currency: 'EUR' }}<br />
-              Risparmio di: {{ element.ratio || 0 | currency: 'EUR' }}<br />
+              Prezzo offerta: {{ element.offerPrice ? (element.offerPrice | currency: 'EUR') : '-' }}<br />
+              Risparmio di: {{ element.ratio ? (element.ratio | currency: 'EUR') : '-' }}<br />
               Sconto del: {{ element.percentageSaved || 0 }}%
             </div>
             <div>{{ element.title }}</div>

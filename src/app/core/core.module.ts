@@ -18,6 +18,7 @@ import { NguCarouselModule } from '@ngu/carousel';
 import { DefaultToolbarComponent } from './default-toolbar/default-toolbar.component';
 import { DefaultSidenavComponent } from './default-sidenav/default-sidenav.component';
 import { ErrorInterceptor } from '../shared/error.interceptor';
+import { AuthInterceptor } from '../auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { ErrorInterceptor } from '../shared/error.interceptor';
   imports: [SharedModule, NguCarouselModule, AppRoutingModule],
   exports: [AppRoutingModule, NguCarouselModule, CategoryItemComponent, FooterComponent],
   providers: [
-    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }

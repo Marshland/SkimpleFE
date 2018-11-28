@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VERSION } from '../../../environments/version';
 
 @Component({
   selector: 'app-footer',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
   currentYear: number;
+  version = VERSION;
 
   constructor() {}
 

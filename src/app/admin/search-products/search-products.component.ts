@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy, AfterContentInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { MatSort, MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
+import { MatSort, MatTableDataSource, MatPaginator, MatDialog, PageEvent } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { AdminSearchProduct } from './search-product.model';
@@ -27,7 +27,7 @@ import { LayoutService } from 'src/app/shared/layout.service';
   ]
 })
 export class SearchProductsComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
-  allDisplayedColumns = ['img', 'isAvailable', 'categories', 'name', 'price', 'offerPrice', 'ratio', 'action'];
+  allDisplayedColumns = ['img', 'isAvailable', 'categories', 'title', 'price', 'offerPrice', 'ratio', 'action'];
   mobileDisplayedColumns = ['name', 'offerPrice', 'ratio', 'action'];
   displayedColumns = this.allDisplayedColumns.slice();
   filter = new AdminSearchProductFilter();
@@ -45,10 +45,17 @@ export class SearchProductsComponent implements OnInit, AfterViewInit, AfterCont
   maxRatio = 0;
   title = '';
 
+  pageSizeOptions = [10, 20, 50];
+  pageSize = 10;
+
   @ViewChild(MatSort)
   sort: MatSort;
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator;
+
+  @ViewChild('topPaginator')
+  topPaginator: MatPaginator;
+
+  @ViewChild('bottomPaginator')
+  bottomPaginator: MatPaginator;
 
   constructor(private store: Store<fromAdmin.AdminFeatureState>, private dialog: MatDialog, private layoutService: LayoutService) {}
 
@@ -76,14 +83,20 @@ export class SearchProductsComponent implements OnInit, AfterViewInit, AfterCont
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.dataSource.paginator = this.topPaginator;
     this.dataSource.filterPredicate = this.filterTable;
+    this.dataSource.sortData = this.sortData;
   }
 
   ngAfterContentInit() {
     if (this.layoutService.mobileQueryMatches) {
       this.displayedColumns = this.mobileDisplayedColumns.slice();
     }
+  }
+
+  updatePaginator(page: PageEvent) {
+    this.topPaginator.pageIndex = page.pageIndex;
+    this.topPaginator._changePageSize(page.pageSize);
   }
 
   doSearchProduct() {
@@ -154,25 +167,26 @@ export class SearchProductsComponent implements OnInit, AfterViewInit, AfterCont
       return;
     }
 
+    this.topPaginator.pageIndex = 0;
     const results = [];
 
     if (this.minPrice > 0) {
-      results.push(this.compareMinNumber(data.offerPrice || data.price, this.minPrice));
+      results.push(this.compareNumber(data.offerPrice || data.price, this.minPrice, true));
     }
     if (this.maxPrice > 0) {
-      results.push(this.compareMaxNumber(data.offerPrice || data.price, this.maxPrice));
+      results.push(this.compareNumber(data.offerPrice || data.price, this.maxPrice, false));
     }
     if (this.minPercentage > 0) {
-      results.push(this.compareMinNumber(data.percentageSaved, this.minPercentage));
+      results.push(this.compareNumber(data.percentageSaved, this.minPercentage, true));
     }
     if (this.maxPercentage > 0) {
-      results.push(this.compareMaxNumber(data.percentageSaved, this.maxPercentage));
+      results.push(this.compareNumber(data.percentageSaved, this.maxPercentage, false));
     }
     if (this.minRatio > 0) {
-      results.push(this.compareMinNumber(data.ratio, this.minRatio));
+      results.push(this.compareNumber(data.ratio, this.minRatio, true));
     }
     if (this.maxRatio > 0) {
-      results.push(this.compareMaxNumber(data.ratio, this.maxRatio));
+      results.push(this.compareNumber(data.ratio, this.maxRatio, false));
     }
 
     const filterTitle = this.title.trim();
@@ -189,16 +203,41 @@ export class SearchProductsComponent implements OnInit, AfterViewInit, AfterCont
     return results.every(x => x);
   }
 
-  private compareMinNumber(value, valueToCompare): boolean {
+  private compareNumber(value, valueToCompare, min: boolean): boolean {
     if (value && valueToCompare > 0) {
-      return value >= valueToCompare;
+      return min ? value >= valueToCompare : value <= valueToCompare;
     }
   }
 
-  private compareMaxNumber(value, valueToCompare): boolean {
-    if (value && valueToCompare > 0) {
-      return value <= valueToCompare;
+  private sortData = (data: AdminSearchProduct[], sort: MatSort): AdminSearchProduct[] => {
+    this.topPaginator.pageIndex = 0;
+    let sortedData = data.slice();
+    if (sort.active && sort.direction !== '') {
+      sortedData = data.sort((a: AdminSearchProduct, b: AdminSearchProduct) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'ratio':
+            return this.compare(a.ratio || a.price, b.ratio || b.price, isAsc);
+          case 'offerPrice':
+            return this.compare(a.offerPrice || a.price, b.offerPrice || b.price, isAsc);
+          case 'price':
+            return this.compare(a.price, b.price, isAsc);
+          case 'title':
+            return this.compare(a.title, b.title, isAsc);
+          case 'categories':
+            return this.compare(this.getProductCategory(a), this.getProductCategory(b), isAsc);
+          case 'isAvailable':
+            return this.compare(a.isAvailable, b.isAvailable, isAsc);
+          default:
+            return 0;
+        }
+      });
     }
+    return sortedData;
+  }
+
+  private compare(a, b, isAsc) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
   ngOnDestroy(): void {

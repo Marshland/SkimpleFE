@@ -1,5 +1,6 @@
 import * as AuthActions from './auth.actions';
 import { User } from '../user.model';
+import { ROLES } from '../role-constant';
 
 export interface State {
   user: User;
@@ -42,5 +43,5 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
 }
 
 export const getIsAuth = (state: State) => state.user !== null;
-export const getIsAdmin = (state: State) => state.user !== null && state.user.isAdmin;
+export const getIsAdmin = (state: State) => state.user !== null && state.user.authorities.some(x => x.authority === ROLES.admin);
 export const getIsLoading = (state: State) => state.isLoading;

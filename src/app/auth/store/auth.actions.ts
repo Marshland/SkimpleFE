@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { AuthData } from '../auth-data.model';
+import { SignupData, SigninData } from '../auth-data.model';
 import { User } from '../user.model';
 
 export const TRY_SIGNUP = '[Auth] Try Signup';
@@ -12,18 +12,18 @@ export const ERROR = '[Auth] Error';
 export class TrySignup implements Action {
   readonly type = TRY_SIGNUP;
 
-  constructor(public payload: AuthData) {}
+  constructor(public payload: SignupData) {}
 }
 
 export class TrySignin implements Action {
   readonly type = TRY_SIGNIN;
 
-  constructor(public payload: AuthData) {}
+  constructor(public payload: SigninData) {}
 }
 
 export class Signup implements Action {
   readonly type = SIGNUP;
-  constructor(public payload: User) {}
+  constructor() {}
 }
 
 export class Signin implements Action {

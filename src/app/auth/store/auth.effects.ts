@@ -5,7 +5,7 @@ import { map, tap, switchMap, catchError } from 'rxjs/operators';
 
 import * as AuthActions from './auth.actions';
 import { AuthService } from '../auth.service';
-import { AuthData } from '../auth-data.model';
+import { SignupData, SigninData } from '../auth-data.model';
 import { User } from '../user.model';
 import { of } from 'rxjs';
 
@@ -17,11 +17,10 @@ export class AuthEffects {
     map((action: AuthActions.TrySignup) => {
       return action.payload;
     }),
-    switchMap((authData: AuthData) => {
-      return this.authService.registerUser(authData).pipe(
-        map((user: User) => {
-          this.router.navigate(['/']);
-          return new AuthActions.Signup(user);
+    switchMap((signupData: SignupData) => {
+      return this.authService.registerUser(signupData).pipe(
+        map(() => {
+          return new AuthActions.TrySignin({ email: signupData.email, password: signupData.password });
         }),
         catchError(() => of(new AuthActions.Error()))
       );
@@ -34,7 +33,7 @@ export class AuthEffects {
     map((action: AuthActions.TrySignin) => {
       return action.payload;
     }),
-    switchMap((authData: AuthData) => {
+    switchMap((authData: SigninData) => {
       return this.authService.login(authData).pipe(
         map((user: User) => {
           this.router.navigate(['/']);
@@ -48,8 +47,16 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   authLogout = this.actions$.pipe(
     ofType(AuthActions.LOGOUT),
-    tap(() => {
-      this.router.navigate(['/']);
+    switchMap(() => {
+      return this.authService.logout().pipe(
+        tap(() => {
+          this.router.navigate(['/']);
+        }),
+        catchError(() => {
+          this.router.navigate(['/']);
+          return of(new AuthActions.Error());
+        })
+      );
     })
   );
 

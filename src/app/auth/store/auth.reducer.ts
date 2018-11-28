@@ -21,6 +21,10 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
         isLoading: true
       };
     case AuthActions.SIGNUP:
+      return {
+        ...state,
+        isLoading: false
+      };
     case AuthActions.SIGNIN:
       return {
         ...state,

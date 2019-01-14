@@ -4,7 +4,7 @@
       <mat-icon>menu</mat-icon>
     </button>
     <a mat-button routerLink="/">
-      <img src="./assets/images/skimple.svg">
+      <img src="./assets/images/skimple.svg" />
     </a>
 
     <div fxFlex fxLayoutAlign="end center">
@@ -15,23 +15,24 @@
       <mat-menu #menu="matMenu">
         <a *ngIf="!(isAuth$ | async)" mat-menu-item routerLink="/login">Login</a>
         <a *ngIf="!(isAuth$ | async)" mat-menu-item routerLink="/signup">Registrati</a>
-        <a *ngIf="isAdmin$ | async" routerLink="/admin" routerLinkActive="router-link-active" mat-menu-item>Sezione
-          Admin</a>
-        <a *ngIf="isAuth$ | async" mat-menu-item (click)="logout()">Logout</a>
+        <a *ngIf="(isAdmin$ | async)" routerLink="/admin" routerLinkActive="router-link-active" mat-menu-item>
+          Sezione Admin
+        </a>
+        <a *ngIf="(isAuth$ | async)" mat-menu-item (click)="logout()">Logout</a>
       </mat-menu>
 
       <mat-divider [vertical]="true"></mat-divider>
 
-      <a mat-icon-button aria-label="Facebook">
+      <a mat-icon-button aria-label="Facebook" href="https://www.facebook.com/SkimpleItalia" target="_blank">
         <i class="fab fa-facebook-f"></i>
       </a>
-      <a mat-icon-button aria-label="Twitter">
+      <a mat-icon-button aria-label="Twitter" href="https://twitter.com/SkimpleOfficial" target="_blank">
         <i class="fab fa-twitter"></i>
       </a>
-      <a mat-icon-button aria-label="Instagram">
+      <a mat-icon-button aria-label="Instagram" href="https://www.instagram.com/skimple_italia" target="_blank">
         <i class="fab fa-instagram"></i>
       </a>
-      <a mat-icon-button aria-label="Telegram">
+      <a mat-icon-button aria-label="Telegram" href="http://t.me/skimple" target="_blank">
         <i class="fab fa-telegram-plane"></i>
       </a>
     </div>

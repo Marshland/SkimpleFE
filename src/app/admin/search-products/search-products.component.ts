@@ -28,7 +28,7 @@ import { LayoutService } from 'src/app/shared/layout.service';
 })
 export class SearchProductsComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   allDisplayedColumns = ['img', 'isAvailable', 'categories', 'title', 'price', 'offerPrice', 'ratio', 'action'];
-  mobileDisplayedColumns = ['name', 'offerPrice', 'ratio', 'action'];
+  mobileDisplayedColumns = ['title', 'offerPrice', 'ratio', 'action'];
   displayedColumns = this.allDisplayedColumns.slice();
   filter = new AdminSearchProductFilter();
   dataSource = new MatTableDataSource<AdminSearchProduct>();

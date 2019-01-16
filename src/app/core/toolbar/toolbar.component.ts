@@ -7,11 +7,11 @@ import * as AuthActions from '../../auth/store/auth.actions';
 import { LayoutService } from '../../shared/layout.service';
 
 @Component({
-  selector: 'app-default-toolbar',
-  templateUrl: './default-toolbar.component.html',
-  styleUrls: ['./default-toolbar.component.scss']
+  selector: 'app-toolbar',
+  templateUrl: './toolbar.component.html',
+  styleUrls: ['./toolbar.component.scss']
 })
-export class DefaultToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit {
   isAuth$: Observable<boolean>;
   isAdmin$: Observable<boolean>;
 

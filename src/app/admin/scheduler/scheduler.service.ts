@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 import { Job } from './scheduler.model';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class SchedulerService {
   constructor(private httpClient: HttpClient) {}
 
   getJobs(): Observable<Job[]> {
-    return this.httpClient.get<Job[]>(`${environment.apiPath}/jobs`);
+    return this.httpClient.get<Job[]>(`${environment.apiPath}/jobs`).pipe(map(data => data || []));
   }
 
   runJob(data: Job): Observable<Job> {

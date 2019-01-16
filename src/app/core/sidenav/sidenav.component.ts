@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 
 import { LayoutService } from '../../shared/layout.service';
-import { Category } from '../home/category.model';
+import { Category } from '../../home/category.model';
 
 @Component({
-  selector: 'app-default-sidenav',
-  templateUrl: './default-sidenav.component.html',
-  styleUrls: ['./default-sidenav.component.scss']
+  selector: 'app-sidenav',
+  templateUrl: './sidenav.component.html',
+  styleUrls: ['./sidenav.component.scss']
 })
-export class DefaultSidenavComponent {
+export class SidenavComponent {
   categories: Partial<Category>[] = [
     { title: 'Alimentari', children: [] },
     { title: 'Salute e cura della Persona', children: [] },

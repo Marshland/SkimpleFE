@@ -20,7 +20,7 @@ export function schedulerReducer(state = initialState, action: SchedulerActions.
     case SchedulerActions.FETCH_JOBS:
       return { ...state, isLoading: true };
     case SchedulerActions.FETCHED_JOBS:
-      return { ...state, jobs: action.payload, isLoading: true };
+      return { ...state, jobs: action.payload, isLoading: false };
     case SchedulerActions.RUN_JOB:
       return { ...state, isRunLoading: true };
     case SchedulerActions.COMPLETED_RUN_JOB:

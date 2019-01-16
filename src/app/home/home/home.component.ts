@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Category } from './category.model';
-import { Product } from './product.model';
+import { Category } from '../category.model';
+import { Product } from '../product.model';
 
 @Component({
   selector: 'app-home',

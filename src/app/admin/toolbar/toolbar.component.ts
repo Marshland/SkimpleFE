@@ -7,11 +7,11 @@ import * as AuthActions from '../../auth/store/auth.actions';
 import { LayoutService } from '../../shared/layout.service';
 
 @Component({
-  selector: 'app-admin-toolbar',
-  templateUrl: './admin-toolbar.component.html',
-  styleUrls: ['./admin-toolbar.component.scss']
+  selector: 'app-toolbar',
+  templateUrl: './toolbar.component.html',
+  styleUrls: ['./toolbar.component.scss']
 })
-export class AdminToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit {
   isAuth$: Observable<boolean>;
 
   constructor(private layoutService: LayoutService, private store: Store<fromRoot.AppState>) {}

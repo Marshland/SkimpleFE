@@ -1,15 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MenuItem } from '../menu-item.model';
+import { SidenavItem } from './sidenav-item.model';
 import { LayoutService } from 'src/app/shared/layout.service';
 
 @Component({
-  selector: 'app-menu-item',
-  templateUrl: './menu-item.component.html',
-  styleUrls: ['./menu-item.component.scss']
+  selector: 'app-sidenav-item',
+  templateUrl: './sidenav-item.component.html',
+  styleUrls: ['./sidenav-item.component.scss']
 })
-export class MenuItemComponent implements OnInit {
+export class SidenavItemComponent implements OnInit {
   @Input()
-  menuItems: MenuItem[];
+  menuItems: SidenavItem[];
 
   @Input()
   deepLevel = 0;

@@ -64,18 +64,29 @@ export class SchedulerComponent implements OnInit, AfterViewInit, AfterContentIn
     this.dataSource.filter = filterValue;
   }
 
-  getState(job: Job): string {
-    // if (job.state) {
-    //   switch(job.state.toLowerCase()){
-    //     case 'in_progress':
-    //   }
-    // }
-    return '';
+  canDoAction(action: string, job: Job): boolean {
+    if (job.state) {
+      switch (job.state.toLowerCase()) {
+        case 'in_progress':
+          return action === 'stop';
+        case 'suspended':
+          return action === 'run';
+      }
+    }
+    return true;
   }
 
   getStateIcon(job: Job): string {
     // return product.isAvailable ? 'check' : 'close';
     return '';
+  }
+
+  runJob(job: Job): void {
+    this.store.dispatch(new SchedulerActions.RunJob(job));
+  }
+
+  stopJob(job: Job): void {
+    this.store.dispatch(new SchedulerActions.StopJob(job));
   }
 
   ngOnDestroy(): void {

@@ -1,4 +1,4 @@
-<section [hidden]="dataSource.data.length === 0">
+<section>
 
   <div fxLayout="row" class="filters" fxLayoutAlign="space-around end">
     <mat-form-field fxFlex="80%">
@@ -12,7 +12,7 @@
   <mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
 
     <ng-container matColumnDef="state">
-      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Stato Job</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <!-- <mat-icon>{{getStateIcon(element)}}</mat-icon> -->
         {{element.state}}
@@ -20,35 +20,35 @@
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Nome</mat-header-cell>
       <mat-cell *matCellDef="let element">
         {{element.name}}
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="category">
-      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Categoria</mat-header-cell>
       <mat-cell *matCellDef="let element">
         {{element.category}}
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="startDate">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Categorie</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Data inzio</mat-header-cell>
       <mat-cell *matCellDef="let element">
         {{element.startDate ? (element.startDate | date) : '-'}}
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="endDate">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Prodotto</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Data fine</mat-header-cell>
       <mat-cell *matCellDef="let element" fxLayout="column">
         {{element.endDate ? (element.endDate | date) : '-'}}
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="seconds">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Prezzo</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Durata (s)</mat-header-cell>
       <mat-cell *matCellDef="let element">
         {{element.seconds }}
       </mat-cell>
@@ -57,8 +57,11 @@
     <ng-container matColumnDef="action">
       <mat-header-cell fxFlex="8%" *matHeaderCellDef> </mat-header-cell>
       <mat-cell fxFlex="8%" *matCellDef="let element">
-        <button mat-icon-button>
-          actions
+        <button mat-icon-button *ngIf="canDoAction('run', element)" (click)="runJob(element)">
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="canDoAction('stop', element)" (click)="stopJob(element)">
+          <mat-icon>stop</mat-icon>
         </button>
       </mat-cell>
     </ng-container>

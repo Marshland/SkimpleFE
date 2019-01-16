@@ -8,7 +8,15 @@ export interface State {
 }
 
 const initialState: State = {
-  user: null,
+  user: {
+    password: null,
+    username: 'francescoromano@libero.it',
+    authorities: [{ authority: 'ROLE_ADMIN' }],
+    accountNonExpired: true,
+    accountNonLocked: true,
+    credentialsNonExpired: true,
+    enabled: true
+  },
   isLoading: false
 };
 

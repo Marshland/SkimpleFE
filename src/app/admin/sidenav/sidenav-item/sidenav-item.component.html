@@ -8,5 +8,5 @@
       </button>
     </ng-container>
   </mat-list-item>
-  <app-menu-item *ngIf="menuItem.children && showChildren" [menuItems]="menuItem.children" [deepLevel]="deepLevel + 1"></app-menu-item>
+  <app-sidenav-item *ngIf="menuItem.children && showChildren" [menuItems]="menuItem.children" [deepLevel]="deepLevel + 1"></app-sidenav-item>
 </ng-container>

@@ -1,6 +1,7 @@
 import * as AuthActions from './auth.actions';
 import { User } from '../user.model';
 import { ROLES } from '../role-constant';
+import { environment } from 'src/environments/environment';
 
 export interface State {
   user: User;
@@ -8,15 +9,7 @@ export interface State {
 }
 
 const initialState: State = {
-  user: {
-    password: null,
-    username: 'francescoromano@libero.it',
-    authorities: [{ authority: 'ROLE_ADMIN' }],
-    accountNonExpired: true,
-    accountNonLocked: true,
-    credentialsNonExpired: true,
-    enabled: true
-  },
+  user: null,
   isLoading: false
 };
 
